@@ -19,4 +19,4 @@ def first_fun():
 
 t1 = Thread(target=first_fun)
 t1.start()
-t1.join()
+# t1.join()
