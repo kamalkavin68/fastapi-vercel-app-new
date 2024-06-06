@@ -8,6 +8,7 @@ count = 0
 
 @app.get("/")
 async def root():
+    global count
     return {"detail": f"Current count is {count}"}
 
 def first_fun():
