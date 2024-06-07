@@ -90,7 +90,7 @@ class NseClient:
         
     def getEquityList(self) -> list[EquityInfoSchema]:
         url = "https://nsearchives.nseindia.com/content/equities/EQUITY_L.csv"
-        response = requests.request("GET", url, headers={"User-Agent": self.userAgent}, cookies=self.cookies, timeout=30)
+        response = requests.request("GET", url, headers={"User-Agent": self.userAgent}, cookies=self.cookies, timeout=60)
         newList = []
         for each in pd.read_csv(io.StringIO(response.text)).to_dict("records"):
             eachEquityData = EquityInfoSchema(symbol=each["SYMBOL"], nameOfCompany=each["NAME OF COMPANY"], series=each[" SERIES"],
