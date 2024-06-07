@@ -10,8 +10,8 @@ app = FastAPI()
 def root():
     return {"detail": f"API running..."}
 
-@app.get("/stocks")
-def some():
+@app.get("/nse-stocks-list")
+def stockList():
     nseClient = NseClient()
     allNseStocks = nseClient.getEquityList()
     allNseStocks = [each.dict() for each in allNseStocks]
