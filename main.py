@@ -1,23 +1,18 @@
 from fastapi import FastAPI
-from threading import Thread
-import time
+
+from api.nse.client import NseClient
 
 app = FastAPI()
 
-count = 0
+
 
 @app.get("/")
-async def root():
-    global count
-    return {"detail": f"Current count is {count}"}
+def root():
+    return {"detail": f"API running..."}
 
-def first_fun():
-    while 1:
-        time.sleep(3)
-        global count
-        count += 1
-        print(count)
-
-t1 = Thread(target=first_fun)
-t1.start()
-# t1.join()
+@app.get("/stocks")
+def some():
+    nseClient = NseClient()
+    allNseStocks = nseClient.getEquityList()
+    allNseStocks = [each.dict() for each in allNseStocks]
+    return allNseStocks
